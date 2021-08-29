@@ -7,12 +7,13 @@ const UserController = {
       await user.save()
       res.status(200).json({ user });
     } catch(error) {
-      res.status(404).json({ error });
+      res.status(404).json({ error: error.message });
     }
   },
   getUser: async (req, res) => {
     try {
-      const user = await User.findById(req.params.id)
+      const { name, password } = req.query
+      const user = await User.findOne({ name, password })
       res.status(200).json({ user });
     } catch(error) {
       res.status(404).json({ error });

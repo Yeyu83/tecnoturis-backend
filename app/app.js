@@ -1,11 +1,14 @@
-express = require('express')
+const express = require('express')
 const cors = require('cors')
-const { UserRoutes } = require('./routes/index');
+const compression = require('compression')
+
+const { UserRoutes, HotelRoutes } = require('./routes/index')
 
 const app = express()
 
-app.use(express.json()).use(cors())
+app.use(express.json()).use(cors()).use(compression())
 
-app.use('/user', UserRoutes);
+app.use('/hotel', HotelRoutes)
+app.use('/user', UserRoutes)
 
 module.exports = app;
